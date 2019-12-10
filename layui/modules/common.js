@@ -5,7 +5,7 @@
         i.req({
             url: layui.setter.base + "json/user/logout.js", type: "get", data: {}, done: function (e) {
                 i.exit(function () {
-                    location.href = "user/login.html"
+                    location.href = "../../page/login.html"
                 })
             }
         })

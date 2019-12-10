@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>formSelects-v4 多选</title>
+    <link rel="stylesheet" type="text/css" href="https://raw.githack.com/hnzzmsf/layui-formSelects/master/dist/formSelects-v4.css" />
+</head>
+<body>
+
+
+<div class="layui-form">
+    <div class="layui-fluid">
+        <div class="layui-form layui-col-md12">
+            <div class="layui-form-item">
+                <div class="layui-col-md4">
+                    <label class="layui-form-label">城市<span style="color:red">●</span></label>
+                    <div class="layui-input-block">
+                        <select name="select_base_cityname" id="select_base_cityname" lay-filter="select_base_cityname" xm-select="select_base_cityname" xm-select-type="1">
+                            <option value=""></option>
+                            <option value="1">北京</option>
+                            <option value="2">上海</option>
+                            <option value="3">天津</option>
+                            <option value="4">重庆</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row ">
+                <div class="test-table-reload-btn" style="margin-bottom: 10px;">
+                    <button type="button" class="layui-btn layui-btn-danger" lay-submit lay-filter="btn_submit" id="btn_submit"><i class="layui-icon">&#xe681</i>获取</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+
+<!--<link href="~/layui-v2.4.5/layui/formSelects-v4.css" rel="stylesheet" />-->
+<!--<script src="~/layui-v2.4.5/layui/formSelects-v4.js"></script>-->
+<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://raw.githack.com/hnzzmsf/layui-formSelects/master/dist/formSelects-v4.min.js" type="text/javascript"
+        charset="utf-8"></script>
+<script type="text/javascript">
+    //全局定义一次, 加载formSelects
+    layui.config({
+        base: 'https://raw.githack.com/hnzzmsf/layui-formSelects/master/dist' //此处路径请自行处理, 可以使用绝对路径
+    }).extend({
+        formSelects: 'formSelects-v4'
+    });
+    //加载模块
+    layui.use(['jquery', 'formSelects'], function () {
+        var formSelects = layui.formSelects;
+
+    });
+</script>
+
+<script type="text/javascript">
+    layui.use(['form', 'layer', 'jquery', 'table', 'laydate', 'element', 'upload', 'flow'], function () {
+        var $$ = layui.jquery;
+        var form = layui.form,
+            layer = parent.layer == undefined ? layui.layer : parent.layer,
+            //layer = layui.layer,
+            table = layui.table,
+            laydate = layui.laydate,
+            element = layui.element,
+            upload = layui.upload,
+            flow = layui.flow;
+        form.render();
+
+        form.on('submit(btn_submit)', function (obj) {
+            layer.confirm('确认录入无误吗？', {
+                btn: ['确认', '再看看']
+            }, function () {
+                var getName = JSON.stringify(layui.formSelects.value('select_base_cityname', 'name'));//取值name数组
+                layer.msg("你选择的值为：" + getName, { offset: '150px', icon: 1, time: 5000 }, function () {
+                });
+            });
+        });
+
+    });
+
+</script>
+
+</html>
